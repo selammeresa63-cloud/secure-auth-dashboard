@@ -1,3 +1,5 @@
+import os
+from werkzeug.middleware.proxy_fix import ProxyFix
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -18,6 +20,9 @@ limiter = Limiter(
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
+
+    if os.environ.get("BEHIND_PROXY") == "1":
+        app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1)
 
     db.init_app(app)
     csrf.init_app(app)
