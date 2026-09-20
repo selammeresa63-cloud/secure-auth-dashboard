@@ -1,4 +1,4 @@
-# secure-auth-dashboard# Secure Auth Dashboard
+# Secure Auth Dashboard
 
 A Flask web application with secure user authentication: registration, login, and TOTP-based two-factor authentication (2FA), built with security best practices in mind.
 
