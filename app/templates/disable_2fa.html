@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% from "macros.html" import field %}
+{% block title %}Disable 2FA{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>Disable two-factor authentication</h1>
+  <form method="post" novalidate>
+    {{ form.hidden_tag() }}
+    {{ field(form.password, autocomplete="current-password") }}
+    {{ field(form.code) }}
+    {{ form.submit(class="btn") }}
+  </form>
+  <p class="muted"><a href="{{ url_for('main.dashboard') }}">Cancel</a></p>
+</div>
+{% endblock %}

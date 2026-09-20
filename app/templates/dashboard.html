@@ -3,8 +3,14 @@
 {% block content %}
 <div class="card">
   <h1>Welcome, {{ current_user.username }}</h1>
-  <p class="muted">Member since {{ current_user.created_at.strftime('%Y-%m-%d') }}</p>  <p>Two-factor authentication:
+  <p class="muted">Member since {{ current_user.created_at.strftime('%Y-%m-%d') }}</p>
+  <p>Two-factor authentication:
     <strong>{{ 'Enabled' if current_user.is_2fa_enabled else 'Not enabled' }}</strong>
   </p>
+  {% if current_user.is_2fa_enabled %}
+    <a href="{{ url_for('main.disable_2fa') }}">Disable 2FA</a>
+  {% else %}
+    <a class="btn btn-link" href="{{ url_for('main.setup_2fa') }}">Enable 2FA</a>
+  {% endif %}
 </div>
 {% endblock %}

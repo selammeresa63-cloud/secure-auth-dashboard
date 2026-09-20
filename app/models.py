@@ -1,5 +1,5 @@
 from datetime import datetime, timezone
-
+import pyotp
 from flask_login import UserMixin
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -22,6 +22,12 @@ class User(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+    def verify_totp(self, code):
+        if not self.totp_secret:
+            return False
+        # valid_window=1: ±30 ሰከንድ የሰዓት ልዩነት ይፈቅዳል
+        return pyotp.TOTP(self.totp_secret).verify(code, valid_window=1)
 
 
 @login_manager.user_loader

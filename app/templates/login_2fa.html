@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% from "macros.html" import field %}
+{% block title %}Two-factor verification{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>Two-factor verification</h1>
+  <p class="muted">Enter the 6-digit code from your authenticator app.</p>
+  <form method="post" novalidate>
+    {{ form.hidden_tag() }}
+    {{ field(form.code, autofocus=true) }}
+    {{ form.submit(class="btn") }}
+  </form>
+  <p class="muted"><a href="{{ url_for('main.login') }}">Back to login</a></p>
+</div>
+{% endblock %}

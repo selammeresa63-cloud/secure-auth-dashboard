@@ -48,3 +48,35 @@ class LoginForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired(), Email()])
     password = PasswordField("Password", validators=[DataRequired()])
     submit = SubmitField("Log in")
+
+class TOTPForm(FlaskForm):
+    code = StringField(
+        "6-digit code",
+        validators=[
+            DataRequired(),
+            Regexp(r"^\d{6}$", message="Enter the 6-digit code."),
+        ],
+        render_kw={
+            "inputmode": "numeric",
+            "autocomplete": "one-time-code",
+            "maxlength": "6",
+        },
+    )
+    submit = SubmitField("Verify")
+
+
+class DisableTOTPForm(FlaskForm):
+    password = PasswordField("Password", validators=[DataRequired()])
+    code = StringField(
+        "6-digit code",
+        validators=[
+            DataRequired(),
+            Regexp(r"^\d{6}$", message="Enter the 6-digit code."),
+        ],
+        render_kw={
+            "inputmode": "numeric",
+            "autocomplete": "one-time-code",
+            "maxlength": "6",
+        },
+    )
+    submit = SubmitField("Disable 2FA")
