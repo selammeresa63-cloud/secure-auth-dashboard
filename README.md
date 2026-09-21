@@ -38,3 +38,19 @@ Python 3, Flask, Flask-SQLAlchemy (SQLite), Flask-Login, Flask-WTF, Flask-Limite
 | ![2FA setup](docs/screenshots/03-2fa-setup.png) | ![Dashboard](docs/screenshots/04-dashboard.png) |
 
 ## Run locally
+
+## Configuration
+
+| Variable | Purpose |
+| --- | --- |
+| `SECRET_KEY` | Flask secret key (required in production) |
+| `SESSION_COOKIE_SECURE` | Set to `1` when served over HTTPS |
+| `BEHIND_PROXY` | Set to `1` behind a reverse proxy (correct client IP for rate limiting) |
+
+## Known limitations / future improvements
+
+- Encrypt TOTP secrets at rest (e.g. Fernet)
+- Backup/recovery codes for 2FA
+- Email verification and password reset
+- Persistent rate-limit storage (Redis) and a production database (PostgreSQL)
+- Automated tests (pytest) and CI
