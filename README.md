@@ -1,29 +1,32 @@
-# Secure Auth Dashboard
+# Secure Auth Dashboard (2FA Enabled)
 
-A Flask web application with secure user authentication: registration, login, and TOTP-based two-factor authentication (2FA), built with security best practices in mind.
+A modern, monolithic Web Dashboard built with **Flask**, featuring **Two-Factor Authentication (TOTP)**, session fixation protection, and rate limiting.
 
-**Live demo:** YOUR-LIVE-LINK *(Free hosting: the first load may take ~1 minute, and demo data is reset on restart.)*
+## 🔑 Key Features
 
-## Features
+- **Two-Factor Authentication (TOTP):** QR-code based 2FA setup compatible with Google Authenticator and Authy using `pyotp`.
+- **Security Hardening:** Rate limiting via `Flask-Limiter` to protect against brute-force attacks.
+- **Session Security:** Session fixation mitigation during authentication and state changes.
+- **Clean UI:** Responsive dashboard interface using standard CSS/HTML templates.
 
-- User registration and login with a responsive dashboard
-- TOTP two-factor authentication (Google Authenticator, Aegis, etc.) with QR-code setup
-- 2FA is only enabled after the user proves the first code works
-- Password and code required to disable 2FA
+## 🛠️ Tech Stack
 
-## Architecture
+- **Framework:** Python, Flask
+- **Security:** PyOTP, Flask-Login, Flask-Limiter
+- **Database:** SQLite (SQLAlchemy)
 
-```text
-secure-auth-dashboard/
-├── app/
-│   ├── __init__.py      # App factory, extension init (SQLAlchemy, Login, Limiter, CSRF)
-│   ├── models.py        # User model (password hash, TOTP secret, 2FA state)
-│   ├── routes/
-│   │   ├── auth.py      # Register, login, logout
-│   │   └── twofa.py     # 2FA setup, verify, disable
-│   ├── forms.py         # WTForms with server-side validation
-│   └── templates/       # Jinja2 templates (auto-escaped)
-├── config.py            # Environment-driven config (SQLite / PostgreSQL)
-├── requirements.txt
-├── run.py               # Entry point (dev server)
-└── setup.sh             # One-command environment setup
+## 🚀 How to Run Locally
+
+```bash
+git clone [https://github.com/selammeresa63-cloud/secure-auth-dashboard.git](https://github.com/selammeresa63-cloud/secure-auth-dashboard.git)
+cd secure-auth-dashboard
+
+# Set up Virtual Environment
+python3 -m venv venv
+source venv/bin/activate
+
+# Install Dependencies
+pip install -r requirements.txt
+
+# Run Application
+flask run --port=5001
